@@ -10,20 +10,19 @@ function App() {
   const [news_articles, set_news_articles] = useState([]);
   const [heading, set_heading] = useState("Wildlife")
 
-  useEffect(()=>
-  {
+  useEffect(() => {
     fetch_news()
-  },[])
+  }, [])
 
   function fetch_news(news_type) {
 
     let url;
     if (news_type == undefined) {
-      url = `https://newsapi.org/v2/everything?q=wildlife&from=2024-10-25&sortBy=publishedAt&apiKey=3360e63138474f2aa02a45590dd1d346`;
+      url = `https://newsapi.org/v2/everything?q=wildlife&from=2024-10-27&sortBy=publishedAt&apiKey=6b7ddd9c75aa43069cf3e8ccfc597b8c`;
     }
 
     else {
-      url = `https://newsapi.org/v2/top-headlines?category=${news_type}&language=en&apiKey=3360e63138474f2aa02a45590dd1d346`;
+      url = `https://newsapi.org/v2/top-headlines?category=${news_type}&language=en&apiKey=6b7ddd9c75aa43069cf3e8ccfc597b8c`;
       set_heading(news_type.toUpperCase());
     }
     console.log(news_type + "This is the user choice ")
@@ -31,7 +30,7 @@ function App() {
     fetch(url).then((res) => res.json()).
       then((res) => {
         console.log(res)
-        set_news_articles(res.articles  || []);
+        set_news_articles(res.articles || []);
       })
     get_news(url)
   }
@@ -52,7 +51,7 @@ function App() {
 
       <div className="container p-3 flex flex-wrap items-center justify-around">
 
-        {news}
+        {news.length > 0 ? news : <h2 className='text-white font-bold text-2xl'> We donot have News for Your request </h2>}
 
       </div>
 

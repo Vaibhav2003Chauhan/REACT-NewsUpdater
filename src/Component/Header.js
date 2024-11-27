@@ -75,7 +75,8 @@ function Header(props) {
                                 value={user_choice}
                                 onChange={(e) => set_user_choice(e.target.value)}
                                 onKeyDown={(e) => {
-                                    if (e.key === "Enter") get_user_response();
+                                    e.stopPropagation();
+                                    if (e.key === "Enter") props.fetch_news(user_choice);
                                 }}
                             />
                         </div>
@@ -119,9 +120,12 @@ function Header(props) {
                                 className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Search..."
                                 value={user_choice}
-                                onChange={(e) => set_user_choice(e.target.value)}
+                                onChange={(e) => {
+                                    set_user_choice(e.target.value)
+                                    console.log(e.target.value)
+                                }}
                                 onKeyDown={(e) => {
-                                    if (e.key === "Enter") get_user_response();
+                                    if (e.key === "Enter") props.fetch_news(user_choice);
                                 }}
                             />
                         </div>
